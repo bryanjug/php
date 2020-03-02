@@ -1300,3 +1300,1401 @@ print "</html>\n";
     </body>
 </html>
 
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>php tutorial</title>
+    </head>
+    <body>
+        <form action='site.php' method='get'>
+            Name: <input type='text' name='username'>
+            <input type='submit'>
+            <br>
+            Your name is <?php echo $_GET["username"] ?>
+            <br>
+            Age: <input type='number' name='age'>
+            <input type='submit'>
+            <br>
+            Your age is <?php echo $_GET['age'] ?>
+        </form>
+    </body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <form action='site.php' method='get'>
+            Color: <input type="text" name="color"> <br>
+            Plural Noun: <input type="text" name="pluralNoun"> <br>
+            Celebrity: <input type="text" name="celebrity"> <br>
+            <input type='submit'>
+        </form>
+        <br>
+        <br>
+        
+        <?php 
+            $color = $_GET['color'];
+            $pluralNoun = $_GET['pluralNoun'];
+            $celebrity = $_GET['celebrity'];
+            echo "Roses are $color <br>";
+            echo "$pluralNoun are blue <br>";
+            echo "I love $celebrity <br>";
+        ?>
+    </body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <form action='site.php' method='post'>
+            Password: <br><input type="password" name="password">
+            <br>
+            <input type='submit'>
+        </form>
+        <br><br>
+        <?php 
+            echo $_POST['password'];
+        ?>
+    </body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <?php
+            $friends = array("Kevin", "Karen", "Oscar", "Jim");
+            $friends[4] = "Mike";
+
+            echo count($friends);
+        ?>
+    </body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <form action='site.php' method='post'>
+            Apples: <input type='checkbox' name='fruits[]' value='apples'>
+            <br>
+            Oranges: <input type='checkbox' name='fruits[]' value='oranges'>
+            <br>
+            Pears: <input type='checkbox' name='fruits[]' value='pears'>
+            <br>
+            <input type='submit'>
+        </form>
+        <?php
+            $fruits = $_POST['fruits'];
+            echo $fruits[0];
+        ?>
+    </body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <form action='site.php' method='post'>
+            <input type='text' name='student'>    
+            <br>
+            <input type='submit'>
+        </form>
+        <?php
+            $grades = array("Jim"=>"A+", "Pam"=>"A+", "Oscar"=>"C+");
+            echo $grades[$_POST['student']];
+        ?>
+    </body>
+</html>
+
+<body>
+    <?php
+        function sayHi($name, $age){
+            echo "Hello $name, you are $age years old.<br>";
+        }
+
+        sayHi("Tom", 8);
+        sayHi("Dave", 13);
+        sayHi("Mom", 15);
+    ?>
+</body>
+
+<body>
+    <?php
+        function cube($num){
+            return $num * $num * $num;
+        }
+
+        $cubeResult = cube(4);
+        echo $cubeResult;
+    ?>
+</body>
+
+<body>
+    <?php
+        $isMale = false;
+        $isTall = true;
+        if ($isMale && $isTall){
+            echo "You are tall male.";
+        } elseif ($isMale && !$isTall) {
+            echo "You are a short male.";
+        } elseif (!$isMale && $isTall) {
+            echo "You are not male but are tall.";
+        } else {
+            echo "You are not male and not tall.";
+        }
+    ?>
+</body>
+
+<body>
+    <?php
+        function getMax($num1, $num2, $num3) {
+            if($num1 >= $num2 && $num1 >= $num3) {
+                return $num1;
+            } elseif($num2 >= $num1 && $num2 >= $num3) {
+                return $num2;
+            } else {
+                return $num3;
+            }
+        }
+
+        echo getMax(300, 9000, 400);
+    ?>
+</body>
+
+<body>
+    <form action='site.php' method='post'>
+        First Num:<input type="number" step="0.1" name='num1'>
+        <br>
+        OP:<input type="text" name='op'>
+        <br>
+        Second Num:<input type="number" name='num2'>
+        <br>
+        <input type='submit'>
+    </form>
+    <?php
+        $num1 = $_POST["num1"];
+        $num2 = $_POST["num2"];
+        $op = $_POST["op"];
+
+        if($op == '+'){
+            echo $num1 + $num2;
+        } elseif($op == '-'){
+            echo $num1 - $num2;
+        } elseif($op == '/'){
+            echo $num1 / $num2;
+        } elseif($op == '*'){
+            echo $num1 * $num2;
+        } else {
+            echo "Invalid Operator";
+        }
+    ?>
+</body>
+
+<body>
+    <form action='site.php' method='post'>
+        What was your grade?
+        <br>
+        <input type='text' name='grade'>
+        <input type='submit'>
+    </form>
+    <?php
+        $grade = $_POST['grade'];
+        switch($grade){
+            case "A":
+                echo "You did amazing!";
+                break;
+            case "B":
+                echo "You did pretty good!";
+                break;            
+            case "C":
+                echo "You did poorly!";
+                break;    
+            case "D":
+                echo "You did very bad!";
+                break;
+            case "F":
+                echo "You FAIL!";
+                break;
+            default:
+                echo "Invalid Grade";
+        }
+    ?>
+</body>
+
+<body>
+    <?php
+        $index = 6;
+
+        do {
+            echo "$index <br>";
+
+            $index++;
+            
+        } while($index <= 5);
+    ?>
+
+</body>
+
+<body>
+    <?php
+        $index = 1;
+
+        while($index <= 5){
+            echo "$index <br>";
+
+            $index++;
+        }
+    ?>
+</body>
+
+<body>
+    <?php
+        $luckyNumbers = array(4, 8, 14, 16, 23, 42);
+        
+        for($i = 0; $i < count($luckyNumbers); $i++){
+            echo "$luckyNumbers[$i] <br>";
+        }
+    ?>
+
+</body>
+
+<body>
+    <?php
+        include "header.html"
+    ?>
+    <p>Hello world</p>
+    <?php
+        include "footer.html"
+    ?>
+</body>
+
+<body>
+    <?php
+        $title = "My first post";
+        $author = 'Mike';
+        $wordCount = 400;
+        include "article-header.php"
+    ?>
+</body>
+
+<body>
+    <?php
+        include "useful-tools.php";
+        sayHi('mike');
+        echo $feetInMile;
+    ?>
+</body>
+
+<!--useful-tools.php-->
+<?php
+    $feetInMile = 5280;
+    
+    function sayHi($name){
+        echo "Hello $name";
+    }
+?>
+
+<!--article-header.php-->
+<h2><?php 
+        echo $title;
+    ?>
+</h2>
+
+<h4><?php 
+        echo $author;
+    ?>
+</h4>
+
+word count: 
+<?php
+    echo $wordCount;
+?>
+
+<!--Constructor classes-->
+<body>
+    <?php
+        class Book {
+            var $title;
+            var $author;
+            var $pages;
+
+            function __construct($aTitle, $aAuthor, $aPages){
+                $this->title = $aTitle;
+                $this->author = $aAuthor;
+                $this->pages = $aPages;
+            }
+        }
+
+        $book1 = new Book("Harry Potter", "JK Rowling", 400);
+        $book1->title = "Hunger Games";
+        $book2 = new Book("Lord of the Rings", "Tolkein", 700);
+        echo $book1->title;
+    ?>
+</body>
+
+<!--Object functions-->
+<body>
+    <?php
+        class Student {
+            var $name;
+            var $major;
+            var $gpa;
+
+            function __construct($name, $major, $gpa) {
+                $this->name = $name;
+                $this->major = $major;
+                $this->gpa = $gpa;
+            }
+
+            function hasHonors(){
+                if($this->gpa >= 3.5){
+                    return "true";
+                }
+                return "false";
+            }
+        }
+
+        $student1 = new Student("Jim", "Business", 2.8);
+        $student2 = new Student("Pam", "Art", 3.6);
+
+        echo $student2->hasHonors();
+    ?>
+</body>
+
+<!--getters and setters-->
+
+<body>
+    <?php
+        class Movie {
+            public $title;
+            private $rating;
+            
+            function __construct($title, $rating) {
+                $this->title = $title;
+                $this->setRating($rating);
+            }
+
+            function getRating(){
+                return $this->rating;
+            }
+
+            function setRating($rating) {
+                if($rating == 'G' || $rating == 'PG' || $rating == 'PG-13' || $rating == 'R' || $rating == 'NR') {
+                    $this->rating = $rating;
+                } else {
+                    $this->$rating = "NR";
+                }
+            }
+        }
+
+        $avengers = new Movie('Avengers', 'Dog');
+            //G, PG, PG-13, R, NR
+
+        echo $avengers->getRating();
+    ?>
+</body>
+
+<!--inheritance / adding class info together-->
+<!--overriding functions-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>401 String Delimiters</title>
+	<link rel="stylesheet" type="text/css" href="css/basic.css" />
+</head>
+
+<body>
+
+<h3>The FOR Loop</h3>
+
+<form method="post" action="0501_FOR_loop.php">
+
+<p>Enter Team Member Names
+<br />1. <input type="text" name="member1" size="30">
+<br />2. <input type="text" name="member2" size="30">
+<br />3. <input type="text" name="member3" size="30">
+<br />4. <input type="text" name="member4" size="30">
+<br />5. <input type="text" name="member5" size="30">
+</p>
+
+<input type="submit" value="Submit Information">
+
+</form>
+
+</body>
+</html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>0501 The FOR Loop</title>
+	<link rel="stylesheet" type="text/css" href="css/basic.css" />
+</head>
+
+<body>
+
+<h3>The FOR Loop</h3>
+
+<h4>Simple For Loop</h4>
+<?php
+	for ($ii = 1; $ii <= 5; $ii++)
+	{
+		print "line: ".$ii."<br />";
+	}
+?>
+
+<h4>Team Memebers</h4>
+<?php
+	for ($ii = 1; $ii <= 5; $ii++)
+	{
+		$member_html_name = 'member'.$ii;
+		$member = $_POST[$member_html_name];
+		
+		print "Team Member : ".$ii.": ".$member;
+	}
+?>
+</body>
+</html>
+
+<html>
+<head>
+	<title>Foor Loop</title>
+	<link rel="stylesheet" type="text/css" href="css/basic.css" />
+</head>
+<body>
+    <h3>Grocery List</h3>
+    <form method="post" action="X_5_1.php">
+        <p>Enter up to 7 grocery items
+        <br />1. <input type="text" name="item1" size="30">
+        <br />2. <input type="text" name="item2" size="30">
+        <br />3. <input type="text" name="item3" size="30">
+        <br />4. <input type="text" name="item4" size="30">
+        <br />5. <input type="text" name="item5" size="30">
+        <br />6. <input type="text" name="item6" size="30">
+        <br />7. <input type="text" name="item7" size="30">
+        </p>
+        <input type="submit" value="Submit Information">
+    </form>
+</body>
+</html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>0501 The FOR Loop</title>
+	<link rel="stylesheet" type="text/css" href="css/basic.css" />
+</head>
+
+<body>
+
+<h3>Grocery List</h3>
+
+<h4>Using For Loop</h4>
+
+<?php
+    print "<ul>";
+
+    for ($ii = 1; $ii <= 7; $ii++)
+	{
+		$item_html_name = 'item'.$ii;
+		$item = $_POST[$item_html_name];
+        print "<li>Item : ".$ii.": ".$item."</li>";    
+    }
+    print "</ul>";
+?>
+</body>
+</html>
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>0402 The WHILE loop</title>
+	<link rel="stylesheet" type="text/css" href="css/basic.css" />
+</head>
+
+<body>
+
+<h3>The WHILE Loop</h3>
+
+<form method="post" action="0502_WHILE_loop.php">
+
+<p>Grocery List
+<br />1. <input type="text" name="item1" size="30">
+<br />2. <input type="text" name="item2" size="30">
+<br />3. <input type="text" name="item3" size="30">
+<br />4. <input type="text" name="item4" size="30">
+<br />5. <input type="text" name="item5" size="30">
+<br />6. <input type="text" name="item6" size="30">
+<br />7. <input type="text" name="item7" size="30">
+</p>
+
+<input type="submit" value="Submit Information">
+
+</form>
+
+</body>
+</html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>0502 The WHILE loop</title>
+	<link rel="stylesheet" type="text/css" href="css/basic.css" />
+</head>
+
+<body>
+
+<h3>The WHILE Loop</h3>
+
+<h4>Simple For Loop</h4>
+<?php
+	$cntr = 1;
+	
+	while($cntr <= 7)
+	{
+		print "line: ".$cntr."<br />";
+		$cntr++;   // Add 1 to $cntr
+	}
+?>
+
+<h4>Grocery List</h4>
+<?php
+
+	$cntr = 1;
+
+	$item = 'dummy';
+	
+	while(!empty($item))
+	{
+		$item_html_name = 'item'.$cntr;
+		
+		$item = $_POST[$item_html_name];
+			
+		if (!empty($item))
+		{
+			print "Item: ".$item."<br />";
+			$cntr++;
+		} 
+	}
+
+?>
+
+
+<h4>Alternate Way to see Grocery List</h4>
+<?php
+
+	$cntr = 1;
+
+	while(true)
+	{
+		$item_html_name = 'item'.$cntr;
+		
+		$item = $_POST[$item_html_name];
+			
+		if (empty($item))
+		{
+			break;
+		} 
+		
+		$cntr++;
+		
+		print "Item: ".$item."<br />";
+		
+	}
+
+?>
+
+<h4>Grocery List - Skipping Pears</h4>
+<?php
+
+	$cntr = 1;
+
+	while(true)
+	{
+		$item_html_name = 'item'.$cntr;
+		
+		$item = $_POST[$item_html_name];
+			
+		if (empty($item))
+		{
+			break;
+		} 
+		
+		$cntr++;
+		
+		if ($item == 'Pears')
+		{
+			continue;  //go back to top and processes next iteration of the loop
+		}
+		
+		print "Item: ".$item."<br />";
+		
+	}
+
+?>
+</body>
+</html>
+
+<html>
+    <head>
+        <title>0402 The WHILE loop</title>
+        <link rel="stylesheet" type="text/css" href="css/basic.css" />
+    </head>
+    
+    <body>
+    <h3>The WHILE Loop</h3>
+    <form method="post" action="X_5_2.php">
+        <p>Enter up to 5 cities
+        <br />1. <input type="text" name="city1" size="30">
+        <br />2. <input type="text" name="city2" size="30">
+        <br />3. <input type="text" name="city3" size="30">
+        <br />4. <input type="text" name="city4" size="30">
+        <br />5. <input type="text" name="city5" size="30">
+        </p>
+        
+        <input type="submit" value="Submit Information">
+        
+    </form>
+    
+    </body>
+</html>
+    
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>0502 The WHILE loop</title>
+	<link rel="stylesheet" type="text/css" href="css/basic.css" />
+</head>
+
+<body>
+
+<h3>The WHILE Loop</h3>
+<?php
+    print "<ul>";
+	$cntr = 1;
+
+	while(true)
+	{
+		$city_html_name = 'city'.$cntr;
+		
+		$city = $_POST[$city_html_name];
+			
+		if (empty($city))
+		{
+			break;
+		} 
+		
+		$cntr++;
+		
+		print "<li>Item: ".$city."</li><br />";
+		
+	}
+    print "</ul>";
+?>
+</body>
+</html>
+
+<!DOCTYPE HTML>
+
+<html>
+<head>
+	<title>0503_Reading_File</title>
+
+	<link rel="stylesheet" type="text/css" href="css/king_2.css" />
+
+</head>
+
+<body>
+
+<h3>Reading From a File</h3>
+
+    <?php
+		$filename = 'data/'.'cities.txt';
+
+		$lines_in_file = count(file($filename));
+
+		$fp = fopen($filename, 'r');   //opens the file for reading
+
+		for ($ii = 1; $ii <= $lines_in_file; $ii++)
+		{
+			$line = fgets($fp);  //Reads one line from the file
+			$city = trim($line);
+
+			print 'City: '.$city.'<br />';
+		}
+
+		fclose($fp);
+
+	?>
+</body>
+</html>
+
+<!DOCTYPE HTML>
+
+<html>
+<head>
+	<title>0503_Reading_File</title>
+
+	<link rel="stylesheet" type="text/css" href="css/king_2.css" />
+
+</head>
+
+<body>
+
+<h3>Reading From a File</h3>
+
+    <?php
+		$filename = 'data/'.'X_5_3.txt';
+
+		$lines_in_file = count(file($filename));
+
+		$fp = fopen($filename, 'r');   //opens the file for reading
+
+		for ($ii = 1; $ii <= $lines_in_file; $ii++)
+		{
+			$line = fgets($fp);  //Reads one line from the file
+			$name = trim($line);
+
+			print 'Baseball Member : '.$ii.' : '.$name.'<br />';
+		}
+
+		fclose($fp);
+
+	?>
+</body>
+</html>
+
+bob saget
+howard stern
+Beetlejuice
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>0504 Write to File</title>
+	<link rel="stylesheet" type="text/css" href="css/basic.css" />
+</head>
+
+<body>
+
+<h3>Write to File</h3>
+
+<form method="post" action="0504_Write_File.php">
+
+<p>Grocery List
+<br />1. <input type="text" name="item1" size="30">
+<br />2. <input type="text" name="item2" size="30">
+<br />3. <input type="text" name="item3" size="30">
+<br />4. <input type="text" name="item4" size="30">
+<br />5. <input type="text" name="item5" size="30">
+<br />6. <input type="text" name="item6" size="30">
+<br />7. <input type="text" name="item7" size="30">
+</p>
+
+<input type="submit" value="Submit Information">
+
+</form>
+
+</body>
+</html>
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>0504_Write File</title>
+	<link rel="stylesheet" type="text/css" href="css/basic.css" />
+</head>
+
+<body>
+
+<h3>Write to File</h3>
+
+<?php
+
+	//************************************
+	//  Write to File  (Overwrite)
+	//************************************
+
+	print "<h4>Writing to File<b/h4>>";
+
+	$filename = 'data/'.'glist_1.txt';
+
+	$fp = fopen($filename, 'w');   //opens the file for writing
+
+	$cntr = 1;
+
+	while(true)
+	{
+		$item_html_name = 'item'.$cntr;
+
+		$item = $_POST[$item_html_name];
+
+		if (empty($item))
+		{
+			break;
+		}
+
+		$cntr++;
+
+		print "Item: ".$item."<br />";
+
+		$output_line = $item."\n";
+
+		fwrite($fp, $output_line);
+
+
+	}
+
+
+	//************************************
+		//  Write to File  (Append)
+	//************************************
+
+	print "<h4>Appending File<b/h4>>";
+
+	$filename = 'data/'.'glist_2.txt';
+
+		$fp = fopen($filename, 'a');   //opens the file for appending
+
+		$cntr = 1;
+
+		while(true)
+		{
+			$item_html_name = 'item'.$cntr;
+
+			$item = $_POST[$item_html_name];
+
+			if (empty($item))
+			{
+				break;
+			}
+
+			$cntr++;
+
+			print "Item: ".$item."<br />";
+
+			$output_line = $item."\n";
+
+			fwrite($fp, $output_line);
+
+		}
+
+
+?>
+
+<p><a href="data/glist_1.txt">See Overwritten File</a></p>
+
+<p><a href="data/glist_2.txt">See Appended File</a></p>
+
+</body>
+</html>
+
+<html>
+<head>
+	<title>0504 Write to File</title>
+	<link rel="stylesheet" type="text/css" href="css/basic.css" />
+</head>
+
+<body>
+
+<h3>Write to File</h3>
+
+<form method="post" action="X_5_4.php">
+
+<p>First Name:
+<br />1. <input type="text" name="item1" size="30">
+<br />
+Last Name: 
+<br />2. <input type="text" name="item2" size="30">
+<br />
+Name of your pet: 
+<br />3. <input type="text" name="item3" size="30">
+</p>
+
+<input type="submit" value="Submit Information">
+
+</form>
+
+</body>
+</html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>0504_Write File</title>
+	<link rel="stylesheet" type="text/css" href="css/basic.css" />
+</head>
+
+<body>
+
+<h3>Write to File</h3>
+
+<?php
+	print "<h4>Appending File<b/h4>>";
+
+	$filename = 'data/'.'glist_2.txt';
+
+		$fp = fopen($filename, 'a');   //opens the file for appending
+
+		$cntr = 1;
+
+		while(true)
+		{
+			$item_html_name = 'item'.$cntr;
+
+			$item = $_POST[$item_html_name];
+
+			if (empty($item))
+			{
+				break;
+			}
+
+			$cntr++;
+
+			print "Item: ".$item."<br />";
+
+			$output_line = $item."\n";
+
+			fwrite($fp, $output_line);
+
+		}
+?>
+<p><a href="data/glist_2.txt">See Appended File</a></p>
+
+</body>
+</html>
+
+Smith|Bob|
+Jones|Jane|
+Smith|Jane|
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>0505 Displaying Data in a Table</title>
+
+	<link rel="stylesheet" type="text/css" href="css/basic_2.css" />
+
+</head>
+
+<body>
+
+<h3>Displaying Data in a Table</h3>
+
+
+	<form method="post" action="0505_Displaying_Data_in_a_Table.php">
+	<p>Add Names to the List</p>
+
+	<p>
+	First Name:<br />
+	<input type="text" name="firstname" size="30" />
+	</p>
+
+	<p>
+	Last Name:<br />
+	<input type="text" name="lastname" size="30" />
+	</p>
+
+	<p>
+	<input type="submit" value="Add Name" />
+	</p>
+
+
+	</form>
+
+
+</body>
+</html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>0505_Displaying_Data_in_a_Table.php</title>
+	<link rel="stylesheet" type="text/css" href="css/basic_2.css" />
+</head>
+
+<body>
+
+
+
+<?php
+//***************************************
+// Gather Data from Form
+//***************************************
+
+$firstname = $_POST['firstname'];
+$lastname = $_POST['lastname'];
+
+$filename = 'data/'.'namelist.txt';
+
+
+//***************************************
+//Add Name Information to File
+//***************************************
+
+$fp = fopen($filename, 'a');   //opens the file for appending
+
+$output_line = $lastname.'|'.$firstname.'|'."\n";
+
+fwrite($fp, $output_line);
+
+fclose($fp);
+
+print "<h3>$lastname, $firstname Added to File</h3>";
+
+
+//*****************************************************
+//Read Name Information from a File into an HTML table
+//*****************************************************
+
+?>
+
+<table border='1'>
+
+<tr>
+	<th>Last Name</th>
+	<th>First Name</th>
+</tr>
+
+
+<?php
+$display = "";
+$line_ctr = 0;
+
+$fp = fopen($filename, 'r');   //opens the file for reading
+
+while(true)
+{
+	$line = fgets($fp);
+
+	if (feof($fp))
+	{
+		break;
+	}
+
+	$line_ctr++;
+
+	$line_ctr_remainder = $line_ctr % 2;
+
+	if ($line_ctr_remainder == 0)
+	{
+		$style = "style='background-color: #FFFFCC;'";
+	} else {
+		$style = "style='background-color: white;'";
+	}
+
+	list($lastname, $firstname) = explode('|', $line);
+
+	$display .= "<tr $style>";
+		$display .= "<td>".$lastname."</td>";
+		$display .= "<td>".$firstname."</td>";
+	$display .= "</tr>\n";  //added newline
+}
+
+fclose($fp );
+
+print $display;   //This prints the table rows
+
+
+?>
+
+</table>
+
+
+</body>
+</html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>0505 Displaying Data in a Table</title>
+
+	<link rel="stylesheet" type="text/css" href="css/basic_2.css" />
+
+</head>
+
+<body>
+    <h3>Displaying Data in a Table</h3>
+    <form method="post" action="X_5_5.php">
+        <p>Add names to the List!</p>
+        <p>
+        First Name:<br />
+        <input type="text" name="firstname" size="30" />
+        </p>
+        <p>
+        Last Name:<br />
+        <input type="text" name="lastname" size="30" />
+        </p>
+        <p>
+            Pet #1:<br />
+            <input type="text" name="pet1" size="30" />
+        </p>
+        <p>
+            Pet #2:<br />
+            <input type="text" name="pet2" size="30" />
+        </p>
+        <p>
+            Pet #3:<br />
+            <input type="text" name="pet3" size="30" />
+        </p>
+        <p>
+        <input type="submit" value="Add Names" />
+        </p>
+    </form>
+</body>
+</html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>Table data</title>
+	<link rel="stylesheet" type="text/css" href="css/basic_2.css" />
+</head>
+<body>
+<?php
+//***************************************
+// Gather Data from Form
+//***************************************
+
+$firstname = $_POST['firstname'];
+$lastname = $_POST['lastname'];
+$pet1 = $_POST['pet1'];
+$pet2 = $_POST['pet2'];
+$pet3 = $_POST['pet3'];
+
+$filename = 'data/'.'namelist.txt';
+
+//***************************************
+//Add Name Information to File
+//***************************************
+
+$fp = fopen($filename, 'a');   //opens the file for appending
+
+$output_line = $firstname.'|'.$lastname.'|'.$pet1.'|'.$pet2.'|'.$pet3."\n";
+
+fwrite($fp, $output_line);
+
+fclose($fp);
+
+print "<h3>$firstname, $lastname, $pet1, $pet2, $pet3 Added to File</h3>";
+
+
+//*****************************************************
+//Read Name Information from a File into an HTML table
+//*****************************************************
+
+?>
+
+<table border='1'>
+
+<tr>
+	<th>First</th>
+    <th>Last</th>
+    <th>Pet1</th>
+    <th>Pet2</th>
+    <th>Pet3</th>
+</tr>
+
+<?php
+$display = "";
+$line_ctr = 0;
+
+$fp = fopen($filename, 'r');   //opens the file for reading
+
+while(true)
+{
+	$line = fgets($fp);
+
+	if (feof($fp))
+	{
+		break;
+	}
+
+	$line_ctr++;
+
+	$line_ctr_remainder = $line_ctr % 2;
+
+	if ($line_ctr_remainder == 0)
+	{
+		$style = "style='background-color: #FFFFCC;'";
+	} else {
+		$style = "style='background-color: white;'";
+	}
+
+	list($firstname, $lastname, $pet1, $pet2, $pet3) = explode('|', $line);
+
+	$display .= "<tr $style>";
+		$display .= "<td>".$firstname."</td>";
+        $display .= "<td>".$lastname."</td>";
+        $display .= "<td>".$pet1."</td>";
+        $display .= "<td>".$pet2."</td>";
+        $display .= "<td>".$pet3."</td>";
+	$display .= "</tr>\n";  //added newline
+}
+
+fclose($fp );
+print $display;   //This prints the table rows
+?>
+
+</table>
+</body>
+</html>
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>0506 Debugging - Part 3</title>
+
+	<link rel="stylesheet" type="text/css" href="css/basic_2.css" />
+
+</head>
+
+<body>
+
+<h3>Debugging - Part 3</h3>
+
+
+	<form method="post" action="0506_Debugging_3.php">
+	<p>Add Names to the List</p>
+
+	<p>
+	First Name:<br />
+	<input type="text" name="firstname" size="30" />
+	</p>
+
+	<p>
+	Last Name:<br />
+	<input type="text" name="lastname" size="30" />
+	</p>
+
+	<p>
+	<input type="submit" value="Add Name" />
+	</p>
+
+
+	</form>
+
+
+</body>
+</html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>0506 Debugging - Part 3</title>
+	<link rel="stylesheet" type="text/css" href="css/basic_2.css" />
+</head>
+
+<body>
+<h3>Debugging - Part 3</h3>
+
+<?php
+//***************************************
+// Gather Data from Form
+//***************************************
+
+$firstname = $_POST['firstname'];
+$lastname = $_POST['lastname'];
+
+$DOCUMENT_ROOT = $_SERVER['DOCUMENT_ROOT'];
+
+$filename = $DOCUMENT_ROOT.'data/'.'namelist.txt';
+
+
+//***************************************
+//Add Name Information to File
+//***************************************
+
+$fp = fopen($filename, 'a');   //opens the file for appending
+
+$output_line = $lastname.'|'.$firstname.'|'."\n";
+
+fwrite($fp, $output_line);
+
+fclose($fp);
+
+print "<h3>$lastname, $firstname Added to File</h3>";
+
+
+//*****************************************************
+//Read Name Information from a File into an HTML table
+//*****************************************************
+
+?>
+
+<table border='1'>
+
+<tr>
+	<th>Last Name</th>
+	<th>First Name</th>
+</tr>
+
+
+<?php
+$display = "";  //empty string
+$line_ctr = 0;
+
+$fp = fopen($filename, 'r');   //opens the file for reading
+
+while(true)
+{
+	$line = fgets($fp);
+
+	if (feof($fp))
+	{
+		break;
+	}
+
+	$line_ctr++;
+
+	$line_ctr_remainder = $line_ctr % 2;
+
+	if ($line_ctr_remainder == 0)
+	{
+		$style = "style='background-color: #FFFFCC;'";
+	}
+	else
+	{
+		$style = "style='background-color: white;'";
+	}
+
+	list($lastname, $firstname) = explode('|', $line);
+
+	print "$lastname, $firstname";
+
+	$display .= "<tr $style>";
+		$display .= "<td>".$lastname."</td>";
+		$display .= "<td>".$firstname."</td>";
+	$display .= "</tr>\n";  //added newline
+}
+
+fclose($fp );
+
+print $display;   //This prints the table rows
+
+
+?>
+
+</table>
+
+</div>
+</body>
+</html>
