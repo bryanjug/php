@@ -1,0 +1,25 @@
+html {
+    margin: 0; 
+    padding: 0;
+}
+
+#logo {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 800px;
+}
+
+body {
+    background-color: #F0E68C;
+}
+
+form {
+    padding-top: 100px;
+    padding-left: 20px;
+}
+
+#results {
+    padding-left: 20px;
+    padding-top: 100px;
+}
