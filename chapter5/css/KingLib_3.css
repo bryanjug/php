@@ -1,0 +1,15 @@
+body {
+    background-color: burlywood;
+}
+form {
+    padding: 5%;
+    background-color: whitesmoke;
+    width: 40%;
+    margin: 1%;
+}
+#results {
+    padding: 5%;
+    background-color: whitesmoke;
+    width: 40%;
+    margin: 1%;    
+}

@@ -1,0 +1,123 @@
+SQL PROBLEMS - BEGIN  COPY & PASTE
+
+
+--------------------------------------------------------------------------------------
+
+
+
+Problem 1. Show the average position that an author appears on a book.
+List the author using the author_id column.
+
+
+
+
+
+
+YOUR ANSWER HERE:
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------
+
+
+
+Problem 2. List each author (by lastname and firstname) and the number of books 
+that the author has written.
+
+
+
+
+
+
+YOUR ANSWER HERE:
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------
+
+
+Problem 3. Display a list of the authors and the city they live in,
+as long as they live in one of the cities that a publisher is based in. 
+
+Use a Subquery instead of a JOIN. 
+
+
+
+
+
+
+
+YOUR ANSWER HERE:
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------
+
+
+Problem 4. Show a list of all authors and the books they have 
+written.  However, only display a book if it has the letters 'oo' contained in 
+its title.
+
+Sort in Lastname, firstname order.
+
+
+
+
+
+
+YOUR ANSWER HERE:
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------
+
+
+Problem 5. List the publisher name and title for all books, but only if 
+they are published by the publisher whose name begins with 'Bin'.  
+
+Sort by publisher name and title.
+
+
+
+
+
+YOUR ANSWER HERE:
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------
+
+
+
+
+SQL PROBLEMS - END  COPY & PASTE
