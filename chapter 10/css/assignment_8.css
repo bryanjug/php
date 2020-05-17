@@ -1,0 +1,47 @@
+body {
+    background-color: #C0C0C0;
+}
+
+h1:first-child {
+    background-color: #F5DEB2;
+}
+
+h1 {
+    color: #0603FE;
+
+}
+
+p {
+    color: #0603FE;
+}
+
+a {
+    color: black;
+}
+
+.shortForm {
+    width: 100px;
+}
+
+.longForm {
+    width: 150px;
+}
+
+.info {
+    color: #444079;
+}
+
+tr:nth-of-type(1n) {
+    background-color: #F5DEB3;
+}
+
+tr:nth-of-type(2n) {
+    background-color: #FFFFFF;
+}
+
+table, th, td {
+    border: 1px solid #3D3D3D;
+}
+table {
+    box-shadow: 1px 1px 3px gray;
+}

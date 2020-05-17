@@ -11,17 +11,12 @@ List the author using the author_id column.
 
 
 
-
-
 YOUR ANSWER HERE:
 
 
-
-
-
-
-
-
+SELECT author_id, AVG(author_order)
+ FROM bookauthor
+ GROUP BY author_order;
 
 --------------------------------------------------------------------------------------
 
@@ -37,13 +32,10 @@ that the author has written.
 
 YOUR ANSWER HERE:
 
-
-
-
-
-
-
-
+SELECT lastname, firstname, COUNT(isbn)
+FROM author JOIN bookauthor
+ USING (author_id)
+ GROUP BY isbn;
 
 --------------------------------------------------------------------------------------
 
@@ -61,13 +53,11 @@ Use a Subquery instead of a JOIN.
 
 YOUR ANSWER HERE:
 
-
-
-
-
-
-
-
+SELECT lastname, firstname, city
+ FROM author
+ WHERE city IN 
+    (SELECT city 
+     FROM publisher);
 
 --------------------------------------------------------------------------------------
 
@@ -86,12 +76,13 @@ Sort in Lastname, firstname order.
 YOUR ANSWER HERE:
 
 
-
-
-
-
-
-
+SELECT lastname, firstname, title 
+FROM author 
+ JOIN bookauthor USING (author_id)
+ JOIN book USING (isbn)
+  GROUP BY title
+    HAVING title LIKE '%oo%'
+  ORDER BY lastname, firstname;
 
 --------------------------------------------------------------------------------------
 
@@ -102,18 +93,17 @@ they are published by the publisher whose name begins with 'Bin'.
 Sort by publisher name and title.
 
 
-
+SELECT name,title FROM publisher JOIN book USING (pub_id)
 
 
 YOUR ANSWER HERE:
 
-
-
-
-
-
-
-
+SELECT name, title 
+FROM publisher
+ JOIN book USING (pub_id)
+  GROUP BY title
+    HAVING name LIKE 'Bin%'    
+  ORDER BY name, title;
 
 --------------------------------------------------------------------------------------
 

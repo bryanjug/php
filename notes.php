@@ -6986,7 +6986,7 @@ function updateAuthor($db, $myssn, $mylastname, $myfirstname)
 	{
 
 		$statement 	= "update author ";
-		$statement .= " set lastname = '".$mylastname."', ";
+		$statement .= "set lastname = '".$mylastname."', ";
 		$statement .= "     firstname = '".$myfirstname."' ";
 		$statement .= "where ssn = '".$myssn."' ";
 
@@ -7486,3 +7486,919 @@ CREATE TABLE author (
         </div>
     </body>
 </html>
+
+SELECT DATE_FORMAT(pubdate, '%m/%d/%Y') FROM book LIMIT 0 , 30;
+
+Update book set pubdate = ADDDATE(pubdate, 31);
+
+//index speeds up query
+CREATE INDEX author_lastname_idx ON author (lastname);
+CREATE INDEX author_fullname_idx ON author (lastname, firstname);
+
+CREATE UNIQUE INDEX book_title_idx ON book (title);
+
+SELECT pub_id, COUNT(title)
+FROM book
+GROUP BY pub_id;
+
+
+SELECT pub_id, type, COUNT(*)
+FROM book
+GROUP BY pub_id, type;
+
+
+SELECT type, AVG(price)
+FROM book
+WHERE advance > 5000
+GROUP BY type;
+
+
+SELECT type, AVG(price)
+FROM book
+GROUP BY type;
+
+
+SELECT type, AVG(price)
+FROM book
+WHERE advance > 5000
+GROUP BY type
+ORDER BY 2;
+
+
+SELECT type, count(*)
+FROM book
+GROUP BY type
+HAVING COUNT(*) > 1;
+
+
+SELECT pub_id, SUM(advance), AVG(price)
+FROM book
+GROUP BY pub_id
+HAVING SUM(advance) > 15000
+ AND AVG(price) < 30
+ AND pub_id  < 3;
+
+ SELECT pub_id, COUNT(title)
+FROM book
+GROUP BY pub_id;
+
+
+SELECT pub_id, type, COUNT(*)
+FROM book
+GROUP BY pub_id, type;
+
+
+SELECT type, AVG(price)
+FROM book
+WHERE advance > 5000
+GROUP BY type;
+
+
+SELECT type, AVG(price)
+FROM book
+GROUP BY type;
+
+
+SELECT type, AVG(price)
+FROM book
+WHERE advance > 5000
+GROUP BY type
+ORDER BY 2;
+
+
+SELECT type, count(*)
+FROM book
+GROUP BY type
+HAVING COUNT(*) > 1;
+
+
+SELECT pub_id, SUM(advance), AVG(price)
+FROM book
+GROUP BY pub_id
+HAVING SUM(advance) > 15000
+ AND AVG(price) < 30
+ AND pub_id  < 3;
+
+ SELECT title, name
+FROM book JOIN publisher 
+ USING (pub_id);
+
+
+SELECT title, name
+FROM book JOIN publisher 
+ ON (book.pub_id = publisher.pub_id);
+ 
+ 
+SELECT title, name
+FROM book t JOIN publisher p
+ ON (t.pub_id = p.pub_id);  
+ 
+ 
+SELECT lastname, firstname
+FROM author 
+ JOIN bookauthor USING (author_id)
+ JOIN book USING (isbn)
+WHERE title = 'Usability Testing';
+ 
+ 
+ 
+SELECT lastname, firstname
+FROM author 
+ JOIN bookauthor USING (author_id)
+ JOIN book USING (isbn);
+
+
+SELECT lastname, firstname, city 
+FROM author 
+ JOIN publisherUSING (city)
+WHERE name = 'Sunshine Publishers';
+
+
+SELECT lastname, firstname, city
+FROM author 
+  JOIN bookauthor USING (author_id)
+WHERE lastname = 'Singer';
+
+
+SELECT lastname, firstname, title
+FROM author
+  JOIN bookauthor USING (author_id)  
+  JOIN book USING (isbn)
+	ORDER BY 1, 2, 3;
+
+
+SELECT title, count(author_id)
+FROM book 	
+  JOIN bookauthor USING (isbn) 
+GROUP BY title	
+  HAVING count(author_id) > 1 
+ORDER BY title;
+
+SELECT price	 
+FROM book	 
+WHERE title = 'Gluten Free or Die';
+   
+   
+SELECT title, price
+FROM book 
+WHERE price = 29.99;
+   
+
+SELECT title, price
+FROM book
+WHERE price = 	
+  (SELECT price	 
+   FROM book	 
+   WHERE title = 'Gluten Free or Die');
+   
+   
+SELECT name, lastname, firstname
+FROM publisher   
+JOIN author USING (city);
+
+
+SELECT name
+FROM publisher
+WHERE city IN	
+  (SELECT city 
+   FROM author);
+
+
+SELECT lastname, firstname, state
+FROM author
+WHERE state='TN' or state='KS' or state='MD';
+
+
+SELECT lastname, firstname, state
+FROM author
+WHERE state IN ('TN', 'KS', 'MD');
+
+
+SELECT lastname, firstname, state
+FROM author
+WHERE state IN 
+ (SELECT state
+  FROM author
+  WHERE state != 'CA');
+
+
+SELECT state
+FROM author
+WHERE state != 'CA';
+  
+  
+SELECT lastname, firstname, state
+FROM author 
+WHERE state IN ('KS', 'TN', 'OR', 'MI', 'IN', 'MD', 'UT');
+
+
+SELECT lastname, firstname
+FROM author
+WHERE ssn IN
+   (SELECT ssn	 
+    FROM bookauthor	 
+    WHERE author_order = 3);
+    
+   
+   
+SELECT title, ytd_sales * price, advance
+FROM book
+WHERE ytd_sales * price >	
+ (SELECT MAX(advance)	 
+  FROM book);
+
+
+
+UPDATE book
+SET price = price * 2 
+WHERE pub_id IN	
+ (SELECT pub_id	 
+  FROM publisher	 
+  WHERE name = 'New Age Books');
+  
+SELECT * 
+FROM book;
+
+//Recursive Programming chapter 10
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>0612 Recursive Programming</title>
+	<link rel="stylesheet" type="text/css" href="css/basic_2.css" />
+</head>
+
+<body>
+
+<h2>Recursive Programming</h2>
+
+<!-- <form method="post" action="http://localhost/0612_Recursive_Programming.php"> -->
+
+<form name="form1" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
+
+<?php
+//***************************************
+// Gather Data from Form
+//***************************************
+
+if (isset($_POST['item_1']))
+{
+	$item_1 = $_POST['item_1'];
+} else {
+	$item_1 = '';
+}
+
+if (isset($_POST['item_2']))
+{
+	$item_2 = $_POST['item_2'];
+} else {
+	$item_2 = '';
+}
+
+if (isset($_POST['amount_1']))
+{
+	$amount_1 = $_POST['amount_1'];
+} else {
+	$amount_1 = '';
+}
+
+if (isset($_POST['amount_2']))
+{
+	$amount_2 = $_POST['amount_2'];
+} else {
+	$amount_2 = '';
+}
+
+
+$display  = 'dummy';
+$total = 0;
+$err_cntr = 0;
+
+$display = "<table border='1'>\n";
+
+$display .= "<tr>";
+	$display .= "<th>Item</th>";
+	$display .= "<th>Amount</th>";
+$display .= "</tr>\n";
+
+$display .= "<tr>";
+	$display .= "<td><input type='text' name='item_1' value='".$item_1."'></td>";
+	$display .= "<td><input type='text' name='amount_1' value='".$amount_1."'></td>";
+
+	if (!empty($amount_1))
+	{
+		if (is_numeric($amount_1))
+		{
+			$total += $amount_1;
+		}
+		else
+		{
+			$err_cntr++;
+			$display .= "<td style='color: red;'>Amount $amount_1 not Numeric</td>";
+		}
+	}
+
+$display .= "</tr>\n";  //added newline
+
+$display .= "<tr>";
+	$display .= "<td><input type='text' name='item_2' value='".$item_2."'></td>";
+	$display .= "<td><input type='text' name='amount_2' value='".$amount_2."'></td>";
+
+	if (!empty($amount_2))
+	{
+		if (is_numeric($amount_2))
+		{
+			$total += $amount_2;
+		}
+		else
+		{
+			$err_cntr++;
+			$display .= "<td style='color: red;'>Amount $amount_2 not Numeric</td>";
+		}
+	}
+
+$display .= "</tr>\n";  //added newline
+
+$display .= "</table>\n";
+
+$display .= "<br /><input type='submit' name='mysubmit' value='Click Me'>";
+
+
+if ($err_cntr > 0)
+{
+	$display .= "<p style='color: red;'>Number of Errors: $err_cntr</p>";
+}
+else
+{
+	$display .= "<p>Total Amount: $total</p>";
+}
+
+
+print $display;   //This prints the table rows
+
+
+?>
+
+
+
+</form>
+
+</body>
+</html>
+
+//chapter 10 log in
+<html>
+<head>
+  <title>Login Example</title>
+  <link rel="stylesheet" href="http://profperry.com/Classes/Main.css" type="text/css">
+
+</head>
+
+<body style="font-family: Arial, Helvetica, sans-serif; color: blue; background-color: silver;">
+
+<form id="myform" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
+
+
+<h2 style="background-color: #F5DEB3;">Login Example</h2>
+
+
+
+<?php
+//**********************************************
+//*
+//*  Get Userid and Password
+//*
+//**********************************************
+
+
+$useridform = $_POST['userid'];
+$passwordform = $_POST['password'];
+
+$outputDisplay = $_POST['outputdisplay'];
+
+
+
+print "<h2>Enter UserId/Password to Login: </h2>";
+
+print "<table> ";
+
+print "<tr> ";
+print "<td>User ID</td><td><input type='text' name='userid' size='11'  value='".$useridform."'><br /> ";
+print "</tr> ";
+
+print "<tr> ";
+print "<td>Password</td><td><input type='test' name='password' size='11' value='".$passwordform."'></td> ";
+print "</tr> ";
+
+
+print "</table> ";
+
+print "<p><input type='submit' name='mysubmit' value='Login'>  </p>";
+
+
+
+//**********************************************
+//*
+//*  Connect to MySQL and Database
+//*
+//**********************************************
+
+
+require('../../DBtest_pptest.php');
+
+$host =  'localhost';
+
+
+$userid =  '7admin7';  //Change this value to your USER ID!
+ 
+
+$password = '7dosql7';
+$dbname = 'testdb';
+
+$db = mysqli_perry_pconnect($host, $userid, $password, $dbname);
+
+if (!$db)
+{
+ print "<h1>Unable to Connect to MySQLi</h1>";
+ exit;
+}
+
+//print "$useridform, $passwordform";
+
+if ($useridform != '')
+{
+	$outputDisplay = doCheckLogin($db, $useridform, $passwordform);
+	//print "<input type='hidden' name='outputdisplay' value='".$outputDisplay."'/>";
+	print "<br>".$outputDisplay;
+}
+
+?>
+
+<hr size="4" style="background-color: #F5DEB3; color: #F5DEB3;" />
+
+</form>
+</body>
+</html>
+
+<?php
+
+function doCheckLogin($db, $useridform, $passwordform)
+{
+
+	//**********************************************
+	//*
+	//*  SELECT from table and display Results
+	//*
+	//**********************************************
+
+	$sql_statement  = "SELECT userid ";
+	$sql_statement .= "FROM patron ";
+	$sql_statement .= "WHERE userid = '".$useridform."' ";
+	$sql_statement .= "AND password = '".$passwordform."' ";
+
+	$result = mysqli_query($db, $sql_statement);  // Run SELECT
+
+	$outputDisplay = "";
+	$myrowcount = 0;
+
+	if (!$result) {
+		$outputDisplay .= "<p style='color: red;'>MySQL No: ".mysqli_errno($db)."<br>";
+		$outputDisplay .= "MySQL Error: ".mysqli_error($db)."<br>";
+		$outputDisplay .= "<br>SQL: ".$sql_statement."<br>";
+	} else {
+
+		$numresults = mysqli_num_rows($result);
+
+		if ($numresults == 0)
+		{
+			$outputDisplay .= "Invalid Login";
+		} else {
+			$outputDisplay .= "Valid Login";
+		}
+	}
+	
+	return $outputDisplay;
+}
+
+?>
+
+//adds username and password to patron table
+update patron
+set userid = 'user1', password='pass1'
+where lastname = 'Jug'
+and firstname = 'Bryan';
+
+SELECT * FROM patron;
+
+//email html
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Send eMail to Somebody</title>
+</head>
+
+<body style="background-color: silver;">
+
+<h2>Send eMail to Somebody</h2>
+
+<form method="post" action="1103_Send_Email.php">
+
+<p>Sendto: First Name: <br />
+	<input type="text" name="firstname" size="30">
+</p>
+
+<p>Sendto: Email Address: <br />
+	<input type="text" name="to_email" size="60">
+</p>
+
+<p>Sendto: Subject: <br />
+	<input type="text" name="subject" size="60">
+</p>
+
+<p>Sendto: Message: <br />
+	<textarea name="message" rows="11" cols="60">
+	</textarea>
+</p>
+
+<p>	<input type="submit" value="Send Email"> </p>
+
+
+</form>
+
+
+</body>
+</html>
+
+//email php
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Send eMail to Somebody</title>
+</head>
+
+<body>
+
+<?php
+
+$myFirstName = $_POST['firstname'];
+$mySubject = $_POST['subject'];
+$myMessage = $_POST['message'];
+$TO_email = $_POST['to_email'];
+
+sendEmailToSomebody($myFirstName, $mySubject, $myMessage, $TO_email);
+
+print "<h4>An email has been sent to $myFirstName</h4>";
+
+
+
+function sendEmailToSomebody($myFirstName, $mySubject, $myMessage, $TO_email)
+{
+
+	$to = $TO_email;
+
+	$subject = "I have graded your $mySubject, ".$myFirstName;
+
+	$body .= "Message:\n\n";
+	$body .= "$myMessage";
+
+	$from = 'From: "The Instructor" <stevetest@profperry.com>';
+
+	$rtnto = '-steveclass@profperry.com';  //Can Specify a different Return-To email!
+
+	mail($to, $subject, $body, $from, $rtnto);
+}
+
+?>
+
+
+</body>
+</html>
+
+//log in assignment 8
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/assignment_8.css" />
+    <title>Assignment 8 Log In</title>
+</head>
+<body>
+    <form method='post' action='<?php echo $_SERVER['PHP_SELF']; ?>'>
+        <h1>Login Validation</h1>
+
+        <h1>Enter UserId/Password to Login:</h1>
+        <p class='info'>
+            User ID
+            <input type='text' name='userID' size='30' class='shortForm'>
+        </p>
+        <p class='info'>
+            Password
+            <input type='text' name='password' size='30' class='shortForm'>
+        </p>
+        <p><input type='submit' value='Login' name='login'>
+        New User? <a href='assignment_8_new_user.php'>Register</a></p>
+    </form>
+    <section id='results'>
+        <?php
+            $userID = $_POST['userID'];
+            $password = $_POST['password'];
+
+            //**********************************************
+            //*
+            //*  Detect Server
+            //*
+            //**********************************************
+
+            $server = $_SERVER['SERVER_NAME'];
+
+            $positionFound = strpos($server, 'profperry');
+
+            if ($positionFound === false)
+            {
+                $server = 'localhost';
+            } else {
+                $server = 'Practice Area';
+            }
+
+            //**********************************************
+            //*
+            //*  Connect to MySQL and Database
+            //*
+            //**********************************************
+
+            if ($server == "Practice Area")
+            {
+                    require('../../DBtest_pptest.php');
+
+                    $host =  'localhost';
+                    $userid_server =  'P17';
+                    $password_server = '7dosql7';
+                    $dbname = 'testdb';
+
+                    $db = mysqli_perry_pconnect($host, $userid_server, $password_server, $dbname);
+
+                    if (!$db)
+                    {
+                        print "<h1>Unable to Connect to MySQLi</h1>";
+                        exit;
+                    }
+
+            } else {
+
+                $db = mysqli_connect('localhost','root','', 'test');
+
+                if (!$db)
+                {
+                    print "<h1>Unable to Connect to MySQL</h1>";
+                }
+            }
+            
+            if (isset($_POST['login'])) {    
+                if (empty($userID) || empty($password)) {    
+                    print "<p>Please fill in every form box!</p>";
+                } else {
+                    $outputDisplay = doCheckLogin($db, $userID, $password);
+                    print "<br>".$outputDisplay;
+                }
+            }
+        ?>
+    </section>
+</body>
+</html>
+
+<?php
+    function doCheckLogin($db, $userID, $password) {
+        $sql_statement = 'SELECT * FROM patron WHERE userid = "'.$userID.'" AND ';
+        $sql_statement .= 'password = "'.$password.'";';
+
+        $result = mysqli_query($db, $sql_statement);  // Run SELECT
+
+        if (!$result) {
+            $outputDisplay = "<p style='color: red;'>MySQL No: ".mysqli_errno($db)."<br>";
+            $outputDisplay .= "MySQL Error: ".mysqli_error($db)."<br>";
+            $outputDisplay .= "<br>SQL: ".$sql_statement."<br>";
+        } else {
+            $numresults = mysqli_num_rows($result);
+            
+            if ($numresults == 0)
+            {
+                $outputDisplay = "<p>Invalid Login</p>";
+            } else {
+                $outputDisplay = "<p>Valid Login</p>";
+                $sql_statement = 'SELECT title, type FROM book ORDER BY title;';
+                $result = mysqli_query($db, $sql_statement);
+
+                if (!$result) {
+                    $output = "<p style='color: red;'>MySQL No: ".mysqli_errno($db)."<br>";
+                    $output .= "MySQL Error: ".mysqli_error($db)."<br>";
+                    $output .= "<br>SQL: ".$sql_statement."<br>";
+                    print "<br>".$output;
+                } else {
+                    $outputDisplay .= '<h1>Books</h1><br><table border="1">';
+                    $outputDisplay .= "
+                        <tr>
+                            <th>Title</th>
+                            <th>Type</th>
+                        </tr>";
+
+                    $numresults = mysqli_num_rows($result);
+
+                    for ($i = 0; $i < $numresults; $i++) {
+                        $row =  mysqli_fetch_array($result);
+                        
+                        $title_row  = $row['title'];
+                        $type_row = $row['type'];
+
+                        $outputDisplay .= "<td>".$title_row."</td>";
+                        $outputDisplay .= "<td>".$type_row."</td>";
+
+                        $outputDisplay .= "</tr>";
+                    }
+
+                    $outputDisplay .= "</table>";
+                }
+            }
+        }
+
+        return $outputDisplay;
+    }
+?>
+
+//assignment 8 new user
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/assignment_8.css" />
+    <title>Assignment 8 Log In</title>
+</head>
+<body>
+    <form method='post' action='<?php echo $_SERVER['PHP_SELF']; ?>'>
+        <h1>Add User/Password to User</h1>
+
+        <h1>Add a UserId/Password to User:</h1>
+        <p class='info'>
+            First Name:
+            <input type='text' name='firstName' size='30' class='longForm'>
+        </p>
+        <p class='info'>
+            Last Name:
+            <input type='text' name='lastName' size='30' class='longForm'>
+        </p>
+        <p class='info'>
+            User ID
+            <input type='text' name='userID' size='30' class='shortForm'>
+        </p>
+        <p class='info'>
+            Password
+            <input type='text' name='password' size='30' class='shortForm'>
+        </p>
+        <input type='submit' value='Update User' name='submit'>
+    </form>
+    <section id='results'>
+        <?php
+            $lastName = $_POST['lastName'];
+            $firstName = $_POST['firstName'];
+            $userID = $_POST['userID'];
+            $password = $_POST['password'];
+
+            //**********************************************
+            //*
+            //*  Detect Server
+            //*
+            //**********************************************
+
+            $server = $_SERVER['SERVER_NAME'];
+
+            $positionFound = strpos($server, 'profperry');
+
+            if ($positionFound === false)
+            {
+                $server = 'localhost';
+            } else {
+                $server = 'Practice Area';
+            }
+
+            //**********************************************
+            //*
+            //*  Connect to MySQL and Database
+            //*
+            //**********************************************
+
+            if ($server == "Practice Area")
+            {
+                    require('../../DBtest_pptest.php');
+
+                    $host =  'localhost';
+                    $userid_server =  'P17';
+                    $password_server = '7dosql7';
+                    $dbname = 'testdb';
+
+                    $db = mysqli_perry_pconnect($host, $userid_server, $password_server, $dbname);
+
+                    if (!$db)
+                    {
+                        print "<h1>Unable to Connect to MySQLi</h1>";
+                        exit;
+                    }
+
+            } else {
+
+                $db = mysqli_connect('localhost','root','', 'test');
+
+                if (!$db)
+                {
+                    print "<h1>Unable to Connect to MySQL</h1>";
+                }
+            }
+            
+            if (isset($_POST['submit'])) {             
+                if (empty($lastName) || empty($firstName) || empty($userID) || empty($password)) {    
+                    print "<p>Please fill in every form box!</p>";
+                } else {
+                    $sql_statement_SELECT = 'SELECT * ';
+                    $sql_statement_SELECT .= 'FROM patron WHERE lastname = "'.$lastName.'" ';
+                    $sql_statement_SELECT .= 'AND firstname = "'.$firstName.'";';
+
+                    $result_SELECT = mysqli_query($db, $sql_statement_SELECT);
+
+                    $numresult_SELECT = mysqli_num_rows($result_SELECT);
+
+                    if (!$numresult_SELECT) { //if firstname and lastname doesnt exist
+                        //insert a new name, userid, and password
+                        $sql_statement_INSERT = 'INSERT INTO patron (lastname, firstname, userid, password) ';
+                        $sql_statement_INSERT .= 'VALUES ("'.$lastName.'", "'.$firstName.'", "'.$userID.'", "'.$password.'");';
+
+                        $result_INSERT = mysqli_query($db, $sql_statement_INSERT); 
+                        print "<p>TABLE INSERTED</p>";
+                    } else {
+                        $sql_statement_UPDATE = 'UPDATE patron ';
+                        $sql_statement_UPDATE .= 'set userid = "'.$userID.'", ';
+                        $sql_statement_UPDATE .= 'password = "'.$password.'" ';
+                        $sql_statement_UPDATE .= 'WHERE lastname = "'.$lastName.'" AND ';
+                        $sql_statement_UPDATE .= 'firstname = "'.$firstName.'";';
+
+                        $result_UPDATE = mysqli_query($db, $sql_statement_UPDATE);
+                        
+                        print "<p>TABLE UPDATED</p>";
+                    }
+                }
+            }
+        ?>
+    </section>
+</body>
+</html>
+
+//assignment 8 css
+body {
+    background-color: #C0C0C0;
+}
+
+h1:first-child {
+    background-color: #F5DEB2;
+}
+
+h1 {
+    color: #0603FE;
+
+}
+
+p {
+    color: #0603FE;
+}
+
+a {
+    color: black;
+}
+
+.shortForm {
+    width: 100px;
+}
+
+.longForm {
+    width: 150px;
+}
+
+.info {
+    color: #444079;
+}
+
+tr:nth-of-type(1n) {
+    background-color: #F5DEB3;
+}
+
+tr:nth-of-type(2n) {
+    background-color: #FFFFFF;
+}
+
+table, th, td {
+    border: 1px solid #3D3D3D;
+}
+table {
+    box-shadow: 1px 1px 3px gray;
+}
+
